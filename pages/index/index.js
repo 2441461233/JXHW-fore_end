@@ -31,18 +31,28 @@ Page({
         recommend:"超好用的书支架"
       }
     ]
+    // floor_list: []
   },
   //options(Object)
   onLoad: function(options){
     wx.request({
-      url: 'https://api-hmugo-web.itheima.net/api/public/v1/home/swiperdata',
+      // url: 'https://api-hmugo-web.itheima.net/api/public/v1/home/swiperdata',
+      url: 'http://106.14.209.11:11451/post/search',
       method: 'GET',
-      dataType: 'json',
-      responseType: 'text',
+      header: {
+        Authorization: wx.getStorageSync("token")
+      },
+      // dataType: 'json',
+      // responseType: 'text',
       success: (result)=>{
-        // console.log(result.data.message);
+        console.log(result)
+        var list = result.data.data.records
+        var url_pre = 'http://forestj.oss-cn-beijing.aliyuncs.com/'
+        for(var i=0; i < list.length; i++){
+          list[i].coverLink = url_pre + list[i].coverLink;
+        }
         this.setData({
-          swipper_list: result.data.message
+          swipper_list: list
         })
       }
     });

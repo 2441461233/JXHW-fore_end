@@ -1,8 +1,9 @@
 {
   "pages":[
+    "pages/index/index",
     "pages/login/index",
 
-    "pages/index/index",
+    
     "pages/explore/index",
     "pages/message/index",
     "pages/user/index",
